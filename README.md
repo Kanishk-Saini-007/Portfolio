@@ -19,6 +19,3 @@ Open `index.html` in any modern browser, or serve the folder:
 ```sh
 python3 -m http.server 8000
 ```
-
----
-Kanishk Saini × Instinct
