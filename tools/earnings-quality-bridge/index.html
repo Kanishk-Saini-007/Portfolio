@@ -394,20 +394,21 @@ function renderViz(r, el, u){
   var ni = ocf - r.profit_to_cash_gap;
   var dep = r.modeled_cash_before_other_items - ni - r.working_capital_cash_effect;
   var capex = ocf - r.free_cash_flow;
-  function step(label, v, forceNeg){
-    var neg = forceNeg || v < 0;
-    return '<div class="vz-step"><b class="'+(neg?'neg':'')+'">'+(v>0&&!forceNeg?'+':'')+u.nf(v)+'</b><span>'+label+'</span></div>';
+  function step(label, v, kind){
+    var neg = kind==='neg' || v < 0;
+    var prefix = kind==='total' ? '= ' : (v>0 && kind!=='neg' && kind!=='plain' ? '+' : '');
+    return '<div class="vz-step"><b class="'+(neg?'neg':'')+'">'+prefix+u.nf(v)+'</b><span>'+label+'</span></div>';
   }
   el.innerHTML =
     '<div class="vz-walk">' +
-    step('Reported profit', ni) +
+    step('Reported profit', ni, 'plain') +
     step('Depreciation add-back', dep) +
     step('Working-capital effect', r.working_capital_cash_effect) +
-    step('Modeled cash', r.modeled_cash_before_other_items) +
+    step('Modeled cash, subtotal', r.modeled_cash_before_other_items, 'total') +
     step('Unexplained residual', r.unexplained_other_adjustments) +
-    step('Operating cash flow', ocf) +
-    step('Capex', -capex, true) +
-    step('Free cash flow', r.free_cash_flow) +
+    step('Operating cash flow, subtotal', ocf, 'total') +
+    step('Capex', -capex, 'neg') +
+    step('Free cash flow, subtotal', r.free_cash_flow, 'total') +
     '</div>';
 }
 </script>
