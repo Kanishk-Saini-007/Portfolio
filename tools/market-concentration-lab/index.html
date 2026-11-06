@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Concentration Lab - Kanishk Saini</title>
+<meta name="description" content="Compute concentration from a defined market, and show how a proposed combination changes a descriptive HHI measure. A browser research workbench by Kanishk Saini. Synthetic example included; not investment advice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070807;--panel:rgba(255,255,255,.03);--line:rgba(166,230,40,.14);--line2:rgba(255,255,255,.08);--lime:#A6E628;--lime-soft:rgba(166,230,40,.55);--text:#eef3e6;--muted:#8b9384;--mono:'JetBrains Mono',monospace;--disp:'Syne',sans-serif;--body:'Space Grotesk',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--body);min-height:100vh;-webkit-font-smoothing:antialiased}
+::selection{background:var(--lime);color:#0a0c07}
+header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:16px clamp(14px,5vw,56px);background:rgba(7,8,7,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line2)}
+.logo{font-family:var(--disp);font-weight:800;font-size:17px;letter-spacing:.04em;color:var(--text);text-decoration:none}
+.logo em{color:var(--lime);font-style:normal}
+nav{display:flex;gap:clamp(10px,2.4vw,26px);flex-wrap:wrap}
+nav a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:6px 2px;transition:color .3s}
+nav a:hover{color:var(--lime)}
+main{max-width:1180px;margin:0 auto;padding:56px clamp(16px,4vw,48px) 80px}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--lime);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.kicker::before{content:"";width:30px;height:1px;background:var(--lime)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(30px,4.6vw,50px);line-height:1.05;letter-spacing:-.01em;margin-bottom:16px}
+.lede{color:var(--muted);font-size:clamp(15px,1.6vw,17px);line-height:1.7;max-width:640px;font-weight:300;margin-bottom:20px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime-soft);border:1px solid var(--line);padding:7px 12px;border-radius:2px}
+.layout{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:22px;align-items:start}
+@media(max-width:920px){.layout{grid-template-columns:1fr}}
+.panel{border:1px solid var(--line2);background:rgba(10,12,8,.92);padding:24px}
+.panel h2{font-family:var(--disp);font-weight:700;font-size:19px;margin-bottom:6px}
+.panel .hint{color:var(--muted);font-size:12.5px;line-height:1.6;margin-bottom:16px;font-weight:300}
+textarea{width:100%;min-height:340px;background:rgba(0,0,0,.45);border:1px solid var(--line2);color:var(--text);font-family:var(--mono);font-size:12.5px;line-height:1.7;padding:14px;resize:vertical;border-radius:2px}
+textarea:focus{outline:none;border-color:var(--lime)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:12px 20px;border:1px solid var(--lime);color:var(--lime);background:transparent;cursor:pointer;transition:.3s;display:inline-block}
+.btn:hover{background:rgba(166,230,40,.1)}
+.btn.solid{background:var(--lime);color:#0a0c07}
+.btn.solid:hover{background:#c8f06a}
+.btn.ghost{border-color:var(--line2);color:var(--text)}
+.btn.ghost:hover{border-color:var(--lime);color:var(--lime)}
+#errorBox{margin-top:14px;border:1px solid rgba(255,120,90,.5);background:rgba(255,120,90,.08);color:#ffb59f;font-family:var(--mono);font-size:12px;line-height:1.6;padding:12px 14px;border-radius:2px;white-space:pre-wrap}
+.label-badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--text);border:1px solid var(--line2);padding:8px 12px;border-radius:2px;margin-bottom:18px;line-height:1.5}
+.label-badge.synthetic{border-color:var(--line);color:var(--lime-soft)}
+#summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px}
+.stat{border:1px solid var(--line2);background:var(--panel);padding:16px}
+.stat b{font-family:var(--disp);font-weight:800;font-size:clamp(19px,2vw,25px);color:var(--lime);display:block;word-break:break-word}
+.stat b.neg{color:#ffb59f}
+.stat span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;display:block;margin-top:6px}
+#report h3{font-family:var(--disp);font-weight:700;font-size:16.5px;margin:22px 0 10px;color:var(--text)}
+#report h4{font-family:var(--disp);font-weight:700;font-size:14px;margin:16px 0 8px;color:var(--lime-soft)}
+.kv{display:flex;justify-content:space-between;gap:18px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13.5px}
+.kv .k{color:var(--muted);font-weight:300}
+.kv .v{font-family:var(--mono);font-size:12.5px;text-align:right;word-break:break-word}
+.tbl-wrap{overflow-x:auto;max-height:420px;overflow-y:auto;border:1px solid var(--line2);border-radius:2px;margin:6px 0 4px}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime-soft);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2);position:sticky;top:0;background:#0b0d09}
+td{font-family:var(--mono);font-size:12px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.05);color:var(--text);white-space:nowrap}
+td.neg{color:#ffb59f}
+.check-list{list-style:none;margin:4px 0}
+.check-list li{padding:8px 0 8px 22px;position:relative;color:#c8d3ba;font-size:13.5px;line-height:1.55;border-bottom:1px solid rgba(255,255,255,.05)}
+.check-list li::before{content:"";position:absolute;left:2px;top:15px;width:7px;height:7px;background:var(--lime);border-radius:1px}
+.limits-box{margin-top:26px;border:1px solid var(--line);background:rgba(166,230,40,.05);padding:16px 18px;border-radius:2px}
+.limits-box h3{font-family:var(--mono)!important;font-size:10.5px!important;letter-spacing:.2em;text-transform:uppercase;color:var(--lime)!important;margin:0 0 8px!important}
+.limits-box p{color:#c8d3ba;font-size:13px;line-height:1.7;font-weight:300}
+.raw-wrap{margin-top:18px}
+.raw-wrap pre{background:rgba(0,0,0,.5);border:1px solid var(--line2);padding:16px;font-family:var(--mono);font-size:11.5px;line-height:1.65;overflow:auto;max-height:420px;border-radius:2px}
+.dim{color:var(--muted);font-size:13px}
+footer{border-top:1px solid var(--line2);padding:24px clamp(14px,5vw,56px);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+footer a{color:var(--lime-soft);text-decoration:none}
+footer a:hover{color:var(--lime)}
+.mono-sm{font-size:11px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="../../">KANISHK<em>.</em>SAINI</a>
+  <nav>
+    <a href="../../#projects">Projects</a>
+    <a href="../../#analysis-tools">All tools</a>
+    <a href="https://github.com/Kanishk-Saini-007/market-concentration-lab" target="_blank" rel="noopener">Code &amp; method &#8599;</a>
+  </nav>
+</header>
+<main>
+  <p class="kicker">Finance research workbench</p>
+  <h1>Market Concentration Lab</h1>
+  <p class="lede">Compute concentration from a defined market, and show how a proposed combination changes a descriptive HHI measure.</p>
+  <div class="badges">
+    <span class="badge">Runs fully in your browser</span>
+    <span class="badge">Synthetic example included</span>
+    <span class="badge">Learning tool &middot; not investment advice</span>
+  </div>
+  <div class="layout">
+    <section class="panel" aria-label="Inputs">
+      <h2>Inputs</h2>
+      <p class="hint">JSON input, same schema as the command-line version's <code>example.json</code>. Edit values and run. Ctrl+Enter runs too. Your edits stay in this browser only; nothing is sent anywhere.</p>
+      <textarea id="inputJson" spellcheck="false" aria-label="Input JSON"></textarea>
+      <div class="btn-row">
+        <button class="btn solid" id="runBtn">Run analysis</button>
+        <button class="btn ghost" id="resetBtn">Load synthetic example</button>
+      </div>
+      <div id="errorBox" hidden role="alert"></div>
+    </section>
+    <section class="panel" id="reportPanel" aria-label="Report" aria-live="polite">
+      <h2>Report</h2>
+      <p class="hint">Same calculation as the Python CLI in the linked repo; identical input gives identical output.</p>
+      <div><span class="label-badge" id="inputLabel"></span></div>
+      <div id="summary"></div>
+      <div id="report"></div>
+      <div class="limits-box"><h3>Method limits</h3><p id="limitsText"></p></div>
+      <div class="btn-row">
+        <button class="btn ghost" id="dlBtn">Download report JSON</button>
+        <button class="btn ghost" id="rawBtn">View raw JSON</button>
+      </div>
+      <div class="raw-wrap" id="rawWrap" hidden><pre id="rawJson"></pre></div>
+    </section>
+  </div>
+</main>
+<footer>
+  <span>&copy; 2026 Kanishk Saini</span>
+  <span><a href="https://github.com/Kanishk-Saini-007/market-concentration-lab" target="_blank" rel="noopener">Method, tests &amp; CLI &#8599;</a></span>
+</footer>
+<script>
+var TOOL_META = {"slug":"market-concentration-lab","summary":[["hhi","HHI"],["cr4","CR4"],["effective_equal_size_firms","Effective equal-size firms"],["proposed_hhi","Proposed HHI"]]};
+var EXAMPLE_TEXT = "{\n  \"label\": \"SYNTHETIC fully specified market\",\n  \"market_definition\": \"Illustrative single-region product market, same year\",\n  \"firms\": [\n    {\n      \"name\": \"A\",\n      \"share\": 40\n    },\n    {\n      \"name\": \"B\",\n      \"share\": 30\n    },\n    {\n      \"name\": \"C\",\n      \"share\": 20\n    },\n    {\n      \"name\": \"D\",\n      \"share\": 10\n    }\n  ],\n  \"combine\": [\n    \"C\",\n    \"D\"\n  ]\n}";
+</script>
+<script>
+/* ===== model: faithful JavaScript port of analyze.py (same validation, same math) ===== */
+/* Shared validation helpers, faithful port of analyze.py preamble. */
+function num(row, key, min) {
+  const v = row[key];
+  if (typeof v !== 'number' || !Number.isFinite(v)) throw new Error(key + ' must be a finite number');
+  if (min !== undefined && v < min) throw new Error(key + ' must be at least ' + min);
+  return v;
+}
+function req(cond, msg) { if (!cond) throw new Error(msg); }
+function ratio(a, b) { return b !== 0 ? a / b : null; }
+function isObj(x) { return x !== null && typeof x === 'object' && !Array.isArray(x); }
+function guarded(fn) {
+  return function (data) {
+    if (!isObj(data)) throw new Error('input must be a JSON object');
+    try { return fn(data); } catch (e) {
+      if (e instanceof TypeError) throw new Error('invalid input structure or out-of-range calculation: ' + e.message);
+      throw e;
+    }
+  };
+}
+
+const LIMITS = 'Market definition and share evidence matter more than arithmetic. No jurisdiction-specific legal threshold or merger-approval prediction. An unknown "other" bucket must be disaggregated or excluded from a complete-market HHI; this tool requires complete shares.';
+const analyze = guarded(function (data) {
+  const firms = data['firms']; req(Array.isArray(firms) && firms.length >= 2, 'at least two firms required');
+  const values = {};
+  for (const f of firms) {
+    const name = f.name; req(typeof name === 'string' && name && !(name in values), 'unique firm names required');
+    const share = num(f, 'share', 0); req(share <= 100, 'share cannot exceed 100'); values[name] = share;
+  }
+  const shares = Object.values(values);
+  req(Math.abs(shares.reduce((a, b) => a + b, 0) - 100) < 1e-6, 'shares must sum to 100; do not collapse unknown firms into one artificial competitor');
+  const hhi = shares.reduce((s, x) => s + x * x, 0);
+  const out = { hhi, cr4: shares.slice().sort((a, b) => b - a).slice(0, 4).reduce((a, b) => a + b, 0), effective_equal_size_firms: 10000 / hhi, market_definition: String(data.market_definition !== undefined ? data.market_definition : 'not supplied') };
+  const merger = data['combine'];
+  if (merger !== undefined && merger !== null) {
+    req(Array.isArray(merger) && merger.length === 2 && merger[0] !== merger[1] && merger.every(x => x in values), 'combine must name two distinct existing firms');
+    const a = values[merger[0]], b = values[merger[1]];
+    out.proposed_hhi = hhi + 2 * a * b; out.hhi_increase = 2 * a * b;
+  }
+  return out;
+});
+
+
+</script>
+<script>
+/* ===== app runtime: input handling, report rendering ===== */
+var STORE_KEY = 'ks-tool-' + TOOL_META.slug;
+var ta = document.getElementById('inputJson');
+var errBox = document.getElementById('errorBox');
+var reportBox = document.getElementById('report');
+var summaryBox = document.getElementById('summary');
+var labelBadge = document.getElementById('inputLabel');
+var limitsBox = document.getElementById('limitsText');
+var rawPre = document.getElementById('rawJson');
+var lastReport = null;
+
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function fmt(n) {
+  if (n === null || n === undefined) return 'n/a';
+  if (typeof n === 'number') {
+    if (!isFinite(n)) return String(n);
+    if (Number.isInteger(n)) return n.toLocaleString('en-US');
+    return Number(n.toPrecision(6)).toLocaleString('en-US', { maximumFractionDigits: 6 });
+  }
+  return String(n);
+}
+function pretty(key) {
+  return String(key).replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+}
+function isPlain(x) { return x !== null && typeof x === 'object' && !Array.isArray(x); }
+
+function renderScalarRow(parent, key, value) {
+  var row = document.createElement('div'); row.className = 'kv';
+  row.innerHTML = '<span class="k">' + esc(pretty(key)) + '</span><span class="v">' + esc(fmt(value)) + '</span>';
+  parent.appendChild(row);
+}
+function renderTable(parent, rows) {
+  var cols = []; var seen = {};
+  rows.forEach(function (r) {
+    if (isPlain(r)) Object.keys(r).forEach(function (k) { if (!seen[k]) { seen[k] = true; cols.push(k); } });
+  });
+  if (!cols.length) { renderList(parent, rows); return; }
+  var wrap = document.createElement('div'); wrap.className = 'tbl-wrap';
+  var html = '<table><thead><tr>' + cols.map(function (c) { return '<th>' + esc(pretty(c)) + '</th>'; }).join('') + '</tr></thead><tbody>';
+  rows.forEach(function (r) {
+    html += '<tr>' + cols.map(function (c) {
+      var v = isPlain(r) ? r[c] : r;
+      if (isPlain(v) || Array.isArray(v)) return '<td class="mono-sm">[nested]</td>';
+      var s = fmt(v);
+      var neg = typeof v === 'number' && v < 0;
+      return '<td' + (neg ? ' class="neg"' : '') + '>' + esc(s) + '</td>';
+    }).join('') + '</tr>';
+  });
+  html += '</tbody></table>';
+  wrap.innerHTML = html; parent.appendChild(wrap);
+}
+function renderList(parent, items) {
+  var ul = document.createElement('ul'); ul.className = 'check-list';
+  items.forEach(function (it) {
+    var li = document.createElement('li'); li.textContent = fmt(it); ul.appendChild(li);
+  });
+  parent.appendChild(ul);
+}
+function renderNode(parent, key, value, depth) {
+  if (Array.isArray(value)) {
+    if (key) { var h = document.createElement(depth ? 'h4' : 'h3'); h.textContent = pretty(key); parent.appendChild(h); }
+    if (!value.length) { var e = document.createElement('p'); e.className = 'dim'; e.textContent = 'No rows.'; parent.appendChild(e); }
+    else if (value.every(isPlain)) renderTable(parent, value);
+    else renderList(parent, value);
+  } else if (isPlain(value)) {
+    if (key) { var h2 = document.createElement(depth ? 'h4' : 'h3'); h2.textContent = pretty(key); parent.appendChild(h2); }
+    Object.keys(value).forEach(function (k) { renderNode(parent, k, value[k], depth + 1); });
+  } else {
+    renderScalarRow(parent, key, value);
+  }
+}
+
+function resolvePath(obj, path) {
+  return path.split('.').reduce(function (o, p) { return o == null ? o : o[p]; }, obj);
+}
+function renderSummary(report) {
+  summaryBox.innerHTML = '';
+  TOOL_META.summary.forEach(function (pair) {
+    var v = resolvePath(report, pair[0]);
+    var card = document.createElement('div'); card.className = 'stat';
+    var b = document.createElement('b');
+    if (typeof v === 'number' && v < 0) b.className = 'neg';
+    b.textContent = v === null || v === undefined ? 'None' : fmt(v);
+    var s = document.createElement('span'); s.textContent = pair[1];
+    card.appendChild(b); card.appendChild(s); summaryBox.appendChild(card);
+  });
+}
+
+function runAnalysis() {
+  errBox.hidden = true; errBox.textContent = '';
+  var text = ta.value;
+  var data;
+  try { data = JSON.parse(text); }
+  catch (e) { showError('Invalid JSON: ' + e.message); return; }
+  var report;
+  try { report = analyze(data); }
+  catch (e) { showError(e.message || String(e)); return; }
+  report.input_label = (data && typeof data === 'object' && !Array.isArray(data) && data.label !== undefined) ? String(data.label) : 'Unlabeled user input';
+  report.limits = LIMITS;
+  lastReport = report;
+  labelBadge.textContent = report.input_label;
+  labelBadge.className = 'label-badge' + (/synthetic/i.test(report.input_label) ? ' synthetic' : '');
+  renderSummary(report);
+  reportBox.innerHTML = '';
+  Object.keys(report).forEach(function (k) {
+    if (k === 'input_label' || k === 'limits') return;
+    renderNode(reportBox, k, report[k], 0);
+  });
+  limitsBox.textContent = LIMITS;
+  rawPre.textContent = JSON.stringify(report, null, 2);
+  document.getElementById('reportPanel').hidden = false;
+  try { localStorage.setItem(STORE_KEY, text); } catch (e) {}
+}
+function showError(msg) {
+  errBox.textContent = 'Input error: ' + msg;
+  errBox.hidden = false;
+  document.getElementById('reportPanel').hidden = true;
+}
+function resetExample() {
+  ta.value = EXAMPLE_TEXT;
+  try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+  runAnalysis();
+}
+function downloadReport() {
+  if (!lastReport) return;
+  var blob = new Blob([JSON.stringify(lastReport, null, 2) + '\n'], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = TOOL_META.slug + '-report.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
+}
+function toggleRaw() {
+  var w = document.getElementById('rawWrap');
+  w.hidden = !w.hidden;
+  document.getElementById('rawBtn').textContent = w.hidden ? 'View raw JSON' : 'Hide raw JSON';
+}
+
+document.getElementById('runBtn').addEventListener('click', runAnalysis);
+document.getElementById('resetBtn').addEventListener('click', resetExample);
+document.getElementById('dlBtn').addEventListener('click', downloadReport);
+document.getElementById('rawBtn').addEventListener('click', toggleRaw);
+ta.addEventListener('keydown', function (e) { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') runAnalysis(); });
+
+var restored = null;
+try { restored = localStorage.getItem(STORE_KEY); } catch (e) {}
+ta.value = restored || EXAMPLE_TEXT;
+runAnalysis();
+
+</script>
+</body>
+  </html>
