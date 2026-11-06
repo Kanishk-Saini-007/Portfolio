@@ -104,7 +104,7 @@ nav a{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform
 nav a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--lime);transition:width .35s cubic-bezier(.65,0,.35,1)}
 nav a:hover,nav a.active{color:var(--text)}
 nav a:hover::after,nav a.active::after{width:100%}
-@media (max-width:640px){.logo{font-size:14px}nav{gap:8px}nav a{font-size:8.5px;letter-spacing:.05em;padding:6px 0}}
+@media (max-width:640px){.logo{font-size:13px}nav{gap:6px}nav a{font-size:8px;letter-spacing:.03em;padding:6px 0}}
 
 /* sections */
 section{min-height:100vh;padding:120px clamp(20px,6vw,72px) 90px;max-width:1280px;margin:0 auto;display:flex;flex-direction:column;justify-content:center}
@@ -192,6 +192,50 @@ h1.hero-name .l2 .ch{color:transparent;-webkit-text-stroke:1.5px rgba(166,230,40
 .feat-note{margin-top:26px;color:var(--muted);font-size:14px;font-weight:300}
 .feat-note a{color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime-soft)}
 .feat-note a:hover{color:#c8f06a}
+
+/* projects carousel (restored 3D ring) */
+#projects{max-width:none;padding-left:0;padding-right:0}
+#projects .head{max-width:1280px;margin:0 auto;padding:0 clamp(20px,6vw,72px);width:100%}
+.stage{margin:34px auto 0;height:560px;max-width:1280px;position:relative;perspective:1700px;touch-action:pan-y;cursor:grab}
+.stage.dragging{cursor:grabbing}
+.ring{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.ring.no-anim{transition:none}
+.pcard{position:absolute;width:min(400px,82vw);left:calc(min(400px,82vw)/-2);top:-235px;height:470px;
+  background:rgba(10,12,8,.94);border:1px solid var(--line2);
+  transform-style:preserve-3d;backface-visibility:hidden;
+  transition:border-color .4s,box-shadow .4s,opacity .4s;
+  display:flex;flex-direction:column;overflow:hidden}
+.pcard.front{border-color:var(--lime);box-shadow:0 0 60px rgba(166,230,40,.16),0 30px 60px rgba(0,0,0,.6)}
+.pcard .shot{height:50%;overflow:hidden;border-bottom:1px solid var(--line2);position:relative;
+  background:linear-gradient(135deg,#0d120a,#141a0e)}
+.pcard .shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;
+  filter:saturate(.92);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.pcard.front .shot img{transform:scale(1.04)}
+.pcard .body{padding:20px 22px;display:flex;flex-direction:column;gap:9px;flex:1}
+.pcard .idx{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--lime-soft)}
+.pcard h3{font-family:var(--disp);font-weight:700;font-size:23px;letter-spacing:.01em}
+.pcard p{color:var(--muted);font-size:13.5px;line-height:1.55;font-weight:300;flex:1}
+.pcard .links{display:flex;gap:10px;flex-wrap:wrap}
+.pcard .links a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+  padding:9px 14px;border:1px solid var(--line2);color:var(--text);transition:.3s}
+.pcard .links a:hover{border-color:var(--lime);color:var(--lime)}
+.pcard .links a.primary{background:var(--lime);border-color:var(--lime);color:#0a0c07}
+.pcard .links a.primary:hover{background:#c8f06a;color:#0a0c07}
+.car-nav{display:flex;align-items:center;justify-content:center;gap:26px;margin-top:30px;position:relative;z-index:3}
+.car-btn{width:52px;height:52px;border-radius:50%;border:1px solid var(--line2);background:transparent;color:var(--text);
+  font-size:19px;cursor:pointer;transition:.3s;font-family:var(--body)}
+.car-btn:hover{border-color:var(--lime);color:var(--lime);transform:scale(1.06)}
+.car-count{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--muted)}
+.car-count b{color:var(--lime);font-weight:500}
+/* flat fallback: small screens and reduced motion get an accessible grid instead of the ring */
+.stage.flat{perspective:none;height:auto;cursor:default;padding:0 clamp(20px,6vw,72px)}
+.stage.flat .ring{position:static;transform:none!important;display:grid;left:0;top:0;width:auto;height:auto;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.stage.flat .pcard{position:static;width:auto;left:0;top:0;height:auto;min-height:380px;transform:none!important;
+  opacity:1!important;pointer-events:auto!important}
+.stage.flat .pcard .shot{height:170px}
+.stage.flat ~ .car-nav{display:none}
+@media (max-width:720px){.stage{height:520px}.pcard{height:440px;top:-220px}}
 
 /* skills */
 .skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
@@ -324,55 +368,13 @@ footer .lime{color:var(--lime)}
       <p class="kicker">Projects</p>
       <h2 class="sec-title">Selected work,<br>built to be checked.</h2>
     </div>
-    <div class="feat-wrap" data-anim>
-      <div class="feat-grid">
-        <article class="fcard featured">
-          <a class="shot" href="https://kanishk-saini-007.github.io/company-xray/" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/Kanishk-Saini-007/company-xray/main/docs/desktop.svg" alt="Company X-Ray screenshot" loading="lazy"></a>
-          <div class="body">
-            <span class="idx">01 / PROJECT · FLAGSHIP</span>
-            <h3>Company X-Ray</h3>
-            <p>Source-linked reported revenue changes and a company-specific research thesis journal. Annual and quarterly records are labeled; inherited inputs need source checks.</p>
-            <div class="links"><a class="primary" href="https://kanishk-saini-007.github.io/company-xray/" target="_blank" rel="noopener">Live &#8599;</a><a href="https://github.com/Kanishk-Saini-007/company-xray" target="_blank" rel="noopener">Code &#8599;</a></div>
-          </div>
-        </article>
-        <article class="fcard">
-          <a class="shot" href="https://kanishk-saini-007.github.io/Corporate-Intelligence-Lab/" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/Kanishk-Saini-007/Corporate-Intelligence-Lab/main/docs/desktop.svg" alt="Corporate Intelligence Lab screenshot" loading="lazy"></a>
-          <div class="body">
-            <span class="idx">02 / PROJECT</span>
-            <h3>Corporate Intelligence Lab</h3>
-            <p>Financial-statement ratios and what-if analysis. A learning tool with model limits, not an investment recommendation.</p>
-            <div class="links"><a class="primary" href="https://kanishk-saini-007.github.io/Corporate-Intelligence-Lab/" target="_blank" rel="noopener">Live &#8599;</a><a href="https://github.com/Kanishk-Saini-007/Corporate-Intelligence-Lab" target="_blank" rel="noopener">Code &#8599;</a></div>
-          </div>
-        </article>
-        <article class="fcard">
-          <a class="shot" href="https://kanishk-saini-007.github.io/stark-sky/" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/Kanishk-Saini-007/stark-sky/main/docs/desktop.svg" alt="Stark Sky screenshot" loading="lazy"></a>
-          <div class="body">
-            <span class="idx">03 / PROJECT</span>
-            <h3>Stark Sky</h3>
-            <p>An Ironman-inspired flight game in an interactive browser city. Kept as a creative Three.js learning project.</p>
-            <div class="links"><a class="primary" href="https://kanishk-saini-007.github.io/stark-sky/" target="_blank" rel="noopener">Live &#8599;</a><a href="https://github.com/Kanishk-Saini-007/stark-sky" target="_blank" rel="noopener">Code &#8599;</a></div>
-          </div>
-        </article>
-        <article class="fcard">
-          <a class="shot" href="https://kanishk-saini-007.github.io/Ask-Kanishk/" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/Kanishk-Saini-007/Ask-Kanishk/main/docs/desktop.svg" alt="Ask Kanishk screenshot" loading="lazy"></a>
-          <div class="body">
-            <span class="idx">04 / PROJECT</span>
-            <h3>Ask Kanishk</h3>
-            <p>A chatbot that answers questions about me and my projects, with a roast mode. A tiny serverless proxy keeps the API key out of the browser; offline mode answers when it is unreachable.</p>
-            <div class="links"><a class="primary" href="https://kanishk-saini-007.github.io/Ask-Kanishk/" target="_blank" rel="noopener">Live &#8599;</a><a href="https://github.com/Kanishk-Saini-007/Ask-Kanishk" target="_blank" rel="noopener">Code &#8599;</a></div>
-          </div>
-        </article>
-        <article class="fcard">
-          <a class="shot" href="https://kanishk-saini-007.github.io/android-boot-log-analyzer/" target="_blank" rel="noopener"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22800%22%20height%3D%22500%22%20viewBox%3D%220%200%20800%20500%22%3E%3Crect%20width%3D%22800%22%20height%3D%22500%22%20fill%3D%22%2310160b%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2290%22%20fill%3D%22%23a6e628%22%20font-family%3D%22monospace%22%20font-size%3D%2225%22%3EANDROID%20BOOT%20LOG%20ANALYZER%3C/text%3E%3Ctext%20x%3D%2250%22%20y%3D%22165%22%20fill%3D%22%23eef3e6%22%20font-family%3D%22monospace%22%20font-size%3D%2222%22%3EParse%20logs.%20Classify%20issues.%3C/text%3E%3Ctext%20x%3D%2250%22%20y%3D%22215%22%20fill%3D%22%23eef3e6%22%20font-family%3D%22monospace%22%20font-size%3D%2222%22%3ECompare%20boot%20stages.%3C/text%3E%3Ctext%20x%3D%2250%22%20y%3D%22330%22%20fill%3D%22%238b9384%22%20font-family%3D%22monospace%22%20font-size%3D%2218%22%3EPython%20CLI%20%2B%20browser%20report%3C/text%3E%3Ctext%20x%3D%2250%22%20y%3D%22400%22%20fill%3D%22%23e2b93b%22%20font-family%3D%22monospace%22%20font-size%3D%2218%22%3EILLUSTRATION%2C%20NOT%20AN%20ACTUAL%20LOG%3C/text%3E%3C/svg%3E" alt="Android Boot Log Analyzer illustration" loading="lazy"></a>
-          <div class="body">
-            <span class="idx">05 / PROJECT</span>
-            <h3>Android Boot Log Analyzer</h3>
-            <p>Assignment work: parse Android logs, classify issues and compare boot stages. Synthetic examples, tests and CLI documentation.</p>
-            <div class="links"><a class="primary" href="https://kanishk-saini-007.github.io/android-boot-log-analyzer/" target="_blank" rel="noopener">Live &#8599;</a><a href="https://github.com/Kanishk-Saini-007/android-boot-log-analyzer" target="_blank" rel="noopener">Code &#8599;</a></div>
-          </div>
-        </article>
-      </div>
-      <p class="feat-note">Ten more finance research tools run live in the <a href="#analysis-tools">analysis workbenches</a> below. Everything else is on <a href="https://github.com/Kanishk-Saini-007" target="_blank" rel="noopener">GitHub</a>.</p>
+    <div class="stage" id="stage" data-anim aria-label="3D project carousel">
+      <div class="ring" id="ring"></div>
+    </div>
+    <div class="car-nav" data-anim>
+      <button class="car-btn" id="prevBtn" aria-label="Previous project">&#8592;</button>
+      <span class="car-count"><b id="curIdx">01</b> / <span id="totIdx">14</span></span>
+      <button class="car-btn" id="nextBtn" aria-label="Next project">&#8594;</button>
     </div>
   </section>
 
@@ -697,6 +699,98 @@ function scrambleTitle(el){ return;
   },{passive:true});
 })();
 
+</script>
+
+<script>
+/* ================= PROJECT CAROUSEL (restored 3D ring, 14 items, flat fallback) ================= */
+(function(){
+  function toolCard(title, sub){
+    var svg = "<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'>"
+      + "<rect width='800' height='500' fill='#10160b'/>"
+      + "<rect x='40' y='40' width='720' height='420' fill='none' stroke='#2a351c' stroke-width='2'/>"
+      + "<text x='70' y='120' fill='#a6e628' font-family='monospace' font-size='24' letter-spacing='4'>FINANCE RESEARCH WORKBENCH</text>"
+      + "<text x='70' y='220' fill='#eef3e6' font-family='monospace' font-size='40'>" + title + "</text>"
+      + "<text x='70' y='285' fill='#8b9384' font-family='monospace' font-size='22'>" + sub + "</text>"
+      + "<text x='70' y='410' fill='#a6e628' font-family='monospace' font-size='20'>LIVE BROWSER TOOL + PYTHON CLI</text>"
+      + "</svg>";
+    return "data:image/svg+xml," + encodeURIComponent(svg);
+  }
+  var projects=[
+    {"n":"Company X-Ray","d":"Source-linked reported revenue changes and a company-specific research thesis journal. Annual and quarterly records are labeled; inherited inputs need source checks.","img":"https://raw.githubusercontent.com/Kanishk-Saini-007/company-xray/main/docs/desktop.svg","repo":"company-xray","site":"https://kanishk-saini-007.github.io/company-xray/"},
+    {"n":"Corporate Intelligence Lab","d":"Financial-statement ratios and what-if analysis. A learning tool with model limits, not an investment recommendation.","img":"https://raw.githubusercontent.com/Kanishk-Saini-007/Corporate-Intelligence-Lab/main/docs/desktop.svg","repo":"Corporate-Intelligence-Lab","site":"https://kanishk-saini-007.github.io/Corporate-Intelligence-Lab/"},
+    {"n":"Stark Sky","d":"An Ironman-inspired flight game in an interactive browser city. Kept as a creative Three.js learning project.","img":"https://raw.githubusercontent.com/Kanishk-Saini-007/stark-sky/main/docs/desktop.svg","repo":"stark-sky","site":"https://kanishk-saini-007.github.io/stark-sky/"},
+    {"n":"Android Boot Log Analyzer","d":"Assignment work: parse Android logs, classify issues and compare boot stages. Synthetic examples, tests and CLI documentation.","img":toolCard("BOOT LOG ANALYZER","Parse logs. Classify issues. Compare stages."),"repo":"android-boot-log-analyzer","site":null},
+    {"n":"Earnings Quality Bridge","d":"Reconcile reported profit with operating cash flow, working-capital movements and a clearly named residual.","img":toolCard("EARNINGS QUALITY","Profit-to-cash walk with a named residual."),"repo":"earnings-quality-bridge","site":"https://kanishk-saini-007.github.io/portfolio/tools/earnings-quality-bridge/"},
+    {"n":"Debt Maturity Stress","d":"Yearly liquidity after scheduled maturities and operating cash flows, without assuming refinancing.","img":toolCard("DEBT MATURITY","Stress view: cash vs scheduled repayments."),"repo":"debt-maturity-stress","site":"https://kanishk-saini-007.github.io/portfolio/tools/debt-maturity-stress/"},
+    {"n":"Capital Allocation Review","d":"Where operating cash went, and how much of stated uses needed drawdown or external funds.","img":toolCard("CAPITAL ALLOCATION","Map uses of cash and the funding gap."),"repo":"capital-allocation-review","site":"https://kanishk-saini-007.github.io/portfolio/tools/capital-allocation-review/"},
+    {"n":"Valuation Scenario Lab","d":"Explicit DCF scenarios that expose how much of the answer rests on the terminal assumption.","img":toolCard("VALUATION SCENARIOS","Scenario values and terminal dependence."),"repo":"valuation-scenario-lab","site":"https://kanishk-saini-007.github.io/portfolio/tools/valuation-scenario-lab/"},
+    {"n":"Peer Period Normalizer","d":"Make peers comparable: period length, currency units and balance-sheet denominators made explicit.","img":toolCard("PEER NORMALIZER","Same periods, same currency, shown adjustments."),"repo":"peer-period-normalizer","site":"https://kanishk-saini-007.github.io/portfolio/tools/peer-period-normalizer/"},
+    {"n":"Guidance Evidence Ledger","d":"Compare numeric management targets with dated evidence, keeping claim, metric, unit and sources verbatim.","img":toolCard("GUIDANCE LEDGER","Targets vs dated evidence, sources kept."),"repo":"guidance-evidence-ledger","site":"https://kanishk-saini-007.github.io/portfolio/tools/guidance-evidence-ledger/"},
+    {"n":"Startup Cohort Economics","d":"Observed retention, contribution cash generation and actual CAC payback for a monthly cohort.","img":toolCard("COHORT ECONOMICS","Retention and CAC payback, observed only."),"repo":"startup-cohort-economics","site":"https://kanishk-saini-007.github.io/portfolio/tools/startup-cohort-economics/"},
+    {"n":"Segment Mix Attribution","d":"Split each segment's revenue change into volume and price effects with an exact symmetric bridge.","img":toolCard("SEGMENT MIX","Volume vs price, exact bridge."),"repo":"segment-mix-attribution","site":"https://kanishk-saini-007.github.io/portfolio/tools/segment-mix-attribution/"},
+    {"n":"Market Concentration Lab","d":"HHI, CR4 and the effect of a proposed combination on a defined market. Descriptive, not a legal test.","img":toolCard("CONCENTRATION LAB","HHI before and after a combination."),"repo":"market-concentration-lab","site":"https://kanishk-saini-007.github.io/portfolio/tools/market-concentration-lab/"},
+    {"n":"Historical Portfolio Risk","d":"Replay a fixed-weight rebalanced portfolio: volatility, maximum drawdown and historical loss quantiles.","img":toolCard("PORTFOLIO RISK","Volatility, drawdown, loss quantiles."),"repo":"historical-portfolio-risk","site":"https://kanishk-saini-007.github.io/portfolio/tools/historical-portfolio-risk/"}
+  ];
+  var ring=document.getElementById('ring'),
+      stage=document.getElementById('stage'),
+      cur=document.getElementById('curIdx'),
+      N2=projects.length,step=360/N2,rot=0,R=900;
+  var flat = REDUCED || window.matchMedia('(max-width:720px)').matches || !window.requestAnimationFrame;
+  document.getElementById('totIdx').textContent = N2;
+  projects.forEach(function(p,i){
+    var gh='https://github.com/Kanishk-Saini-007/'+p.repo;
+    var c=document.createElement('div');
+    c.className='pcard';c.dataset.i=i;
+    var links=p.site?
+      '<a class="primary" href="'+p.site+'" target="_blank" rel="noopener">Live &#8599;</a>'+
+      '<a href="'+gh+'" target="_blank" rel="noopener">Code &#8599;</a>':
+      '<a class="primary" href="'+gh+'" target="_blank" rel="noopener">Code &#8599;</a>';
+    c.innerHTML=
+      '<div class="shot"><img src="'+p.img+'" alt="'+p.n+' screenshot" loading="lazy" draggable="false" onerror="this.style.display=\'none\'"></div>'+
+      '<div class="body"><span class="idx">'+(i+1<10?'0':'')+(i+1)+' / '+(p.site&&p.site.indexOf('/tools/')>-1?'TOOL':'PROJECT')+'</span><h3>'+p.n+'</h3><p>'+p.d+'</p>'+
+      '<div class="links">'+links+'</div></div>';
+    ring.appendChild(c);
+  });
+  var cards=Array.prototype.slice.call(ring.children);
+  if(flat){
+    stage.classList.add('flat');
+    return;
+  }
+  function radius(){
+    var w=Math.min(400,window.innerWidth*.82);
+    R=Math.max(340,(w/2)/Math.tan(Math.PI/N2)+120);
+  }
+  radius();window.addEventListener('resize',function(){radius();update(false);});
+  function update(anim){
+    ring.classList.toggle('no-anim',!anim);
+    ring.style.transform='translateZ('+(-R)+'px) rotateY('+rot+'deg)';
+    var idx=((Math.round(-rot/step))%N2+N2)%N2;
+    cards.forEach(function(c,i){
+      c.style.transform='rotateY('+(i*step)+'deg) translateZ('+R+'px)';
+      c.classList.toggle('front',i===idx);
+      var diff=Math.abs(((i*step+rot)%360+540)%360-180);
+      c.style.opacity=diff>110?.14:(diff>60?.45:1);
+      c.style.pointerEvents=diff>60?'none':'auto';
+    });
+    cur.textContent=(idx+1<10?'0':'')+(idx+1);
+    if(!anim)requestAnimationFrame(function(){ring.classList.remove('no-anim');});
+  }
+  update(false);
+  document.getElementById('prevBtn').addEventListener('click',function(){rot+=step;update(true);});
+  document.getElementById('nextBtn').addEventListener('click',function(){rot-=step;update(true);});
+  var dragging=false,sx=0,sr=0,downX=0,downY=0;
+  stage.addEventListener('pointerdown',function(e){dragging=true;sx=e.clientX;sr=rot;downX=e.clientX;downY=e.clientY;stage.classList.add('dragging');try{stage.setPointerCapture(e.pointerId);}catch(_){}});
+  stage.addEventListener('pointermove',function(e){
+    if(!dragging)return;
+    rot=sr+(e.clientX-sx)*.22;update(false);
+  });
+  stage.addEventListener('pointerup',function(){dragging=false;stage.classList.remove('dragging');rot=Math.round(rot/step)*step;update(true);});
+  stage.addEventListener('pointercancel',function(){dragging=false;stage.classList.remove('dragging');});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft'){rot+=step;update(true);}
+    if(e.key==='ArrowRight'){rot-=step;update(true);}
+  });
+})();
 </script>
 </body>
 </html>
