@@ -104,7 +104,13 @@ nav a{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform
 nav a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--lime);transition:width .35s cubic-bezier(.65,0,.35,1)}
 nav a:hover,nav a.active{color:var(--text)}
 nav a:hover::after,nav a.active::after{width:100%}
-@media (max-width:640px){.logo{font-size:14px}nav{gap:8px}nav a{font-size:8.5px;letter-spacing:.05em;padding:6px 0}}
+@media (max-width:640px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .stage{overflow:hidden}
+  header .logo{font-size:13px}
+  nav{gap:10px}
+  nav a{font-size:8px;letter-spacing:.05em}
+.logo{font-size:14px}nav{gap:8px}nav a{font-size:8.5px;letter-spacing:.05em;padding:6px 0}}
 
 /* sections */
 section{min-height:100vh;padding:120px clamp(20px,6vw,72px) 90px;max-width:1280px;margin:0 auto;display:flex;flex-direction:column;justify-content:center}
@@ -191,7 +197,13 @@ h1.hero-name .l2 .ch{color:transparent;-webkit-text-stroke:1.5px rgba(166,230,40
 .car-btn:hover{border-color:var(--lime);color:var(--lime);transform:scale(1.06)}
 .car-count{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--muted)}
 .car-count b{color:var(--lime);font-weight:500}
-@media (max-width:640px){.stage{height:480px}.pcard{height:430px;top:-215px}}
+@media (max-width:640px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .stage{overflow:hidden}
+  header .logo{font-size:13px}
+  nav{gap:10px}
+  nav a{font-size:8px;letter-spacing:.05em}
+.stage{height:480px}.pcard{height:430px;top:-215px}}
 
 /* skills */
 .skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
@@ -226,6 +238,12 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line2);padding:26p
 footer .lime{color:var(--lime)}
 
 @media (max-width:640px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .stage{overflow:hidden}
+  header .logo{font-size:13px}
+  nav{gap:10px}
+  nav a{font-size:8px;letter-spacing:.05em}
+
   .contact-mail{font-size:16px}
   header{padding-left:12px;padding-right:12px}
   nav a[href="#home"]{display:none}
@@ -312,7 +330,7 @@ footer .lime{color:var(--lime)}
   <section id="projects">
     <div class="head" data-anim>
       <p class="kicker">Projects</p>
-      <h2 class="sec-title">Eighteen fixes,<br>live on the web.</h2>
+      <h2 class="sec-title">Seventeen projects,<br>live on the web.</h2>
     </div>
     <div class="stage" id="stage" data-anim>
       <div class="ring" id="ring"></div>
@@ -373,7 +391,7 @@ var REDUCED=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   var lines=[
     ['&gt; initialising render core','OK'],
     ['&gt; loading 3D engine [three.r128]','OK'],
-    ['&gt; decrypting project vault [18 items]','OK'],
+    ['&gt; decrypting project vault [17 items]','OK'],
     ['&gt; compiling annoyance fixes','OK'],
     ['&gt; welcome.','']
   ];
@@ -773,4 +791,4 @@ function scrambleTitle(el){
 })();
 </script>
 </body>
-</html>
+          </html>
