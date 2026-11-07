@@ -1,6 +1,6 @@
 # Kanishk Saini — Portfolio
 
-**Live: https://kanishk-saini-007.github.io/portfolio/**
+**Live: https://kanishk-saini-007.github.io/Portfolio/**
 
 My 3D interactive personal portfolio — boot-up loader, starfield, rotating wireframe hero and a 3D project carousel, all in plain HTML/CSS/JavaScript with Three.js + GSAP. No build step, no framework.
 
