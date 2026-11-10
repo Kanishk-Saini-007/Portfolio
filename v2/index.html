@@ -754,7 +754,7 @@ if(QA){
     },600);
   }
   var qy=location.search.match(/[?&]y=(\d+)/);
-  if(qy){setTimeout(function(){document.querySelector('main').style.transform='translateY(-'+qy[1]+'px)';},300);}
+  if(qy){setTimeout(function(){document.querySelector('main').style.transform='translateY(-'+qy[1]+'px)';if(parseInt(qy[1])>40){var c=document.querySelector('.scroll-cue');if(c)c.style.visibility='hidden';}},300);}
 }
 
 /* ---------- dissolve ---------- */
@@ -858,6 +858,8 @@ function onScroll(){
       var hr=buildEl.getBoundingClientRect();
       var out=Math.max(0,Math.min(1,-hr.top/vh));
       smokeEl.style.opacity=(0.35+0.65*out).toFixed(3);
+      var cueEl=document.querySelector('.scroll-cue');
+      if(cueEl)cueEl.style.visibility=window.scrollY>40?'hidden':'';
     }
   });
 }
@@ -888,4 +890,4 @@ if(!REDUCED && !QA && window.matchMedia('(pointer:fine)').matches){
 })();
 </script>
 </body>
-                                                                                                                    </html>
+    </html>
