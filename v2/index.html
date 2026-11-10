@@ -110,7 +110,7 @@ html[data-theme="light"] #themeSwitch .thumb{transform:translateX(18px)}
 #hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:36vh;z-index:4;background:linear-gradient(180deg,transparent 0%,rgba(5,5,6,.5) 58%,#050506 97%)}
 #build .shade{background:linear-gradient(180deg,rgba(5,5,6,.55),transparent 30%,transparent 50%,rgba(5,5,6,.85))}
 #build::before{content:"";position:absolute;top:0;left:0;right:0;height:30vh;z-index:4;background:linear-gradient(180deg,#050506 5%,transparent)}
-#build::after{content:"";position:absolute;left:0;right:0;bottom:0;height:52vh;z-index:4;background:linear-gradient(180deg,transparent 0%,rgba(226,226,224,.26) 46%,rgba(232,231,228,.6) 74%,rgba(238,237,233,.9) 97%)}
+#build::after{content:"";position:absolute;left:0;right:0;bottom:0;height:52vh;z-index:4;background:linear-gradient(180deg,transparent 0%,rgba(226,226,224,.26) 46%,rgba(232,231,228,.6) 74%,#eeede9 97%)}
 .si{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;letter-spacing:0}
 .volt{color:#f2d500}.voltd{color:#dda700}.cy{color:var(--cyan)}
 .mband{overflow:hidden;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);margin:0 -5vw 10vh;padding:20px 0}
@@ -124,11 +124,12 @@ html[data-theme="light"] #themeSwitch .thumb{transform:translateX(18px)}
 .smoke i:nth-child(2){left:26vw;bottom:-20vh;width:58vw;animation-duration:19s;animation-delay:-6s}
 .smoke i:nth-child(3){left:62vw;bottom:-16vh;width:52vw;animation-duration:12s;animation-delay:-3s}
 @keyframes smokelift{from{transform:translateY(7vh) scale(1)}to{transform:translateY(-9vh) scale(1.18)}}
-#attendx::before{content:"";position:absolute;top:0;left:0;right:0;height:30vh;z-index:4;background:linear-gradient(180deg,rgba(238,237,233,.64),rgba(238,237,233,.2) 55%,transparent)}
+#attendx::before{content:"";position:absolute;top:0;left:0;right:0;height:34vh;z-index:4;background:linear-gradient(180deg,#eeede9 0%,rgba(238,237,233,.88) 16%,rgba(238,237,233,.5) 42%,rgba(238,237,233,.15) 68%,transparent 90%)}
 /* 2 - fog sinks into black for the ember dissolve */
 #attendx::after{content:"";position:absolute;left:0;right:0;bottom:0;height:38vh;z-index:4;background:linear-gradient(180deg,transparent,rgba(0,0,0,.94) 92%)}
 /* 3 - black gives way to storm: dark mantle + distant lightning */
-#storm::before{content:"";position:absolute;top:0;left:0;right:0;height:32vh;z-index:4;background:linear-gradient(180deg,#000 6%,transparent)}
+#storm{margin-top:-22vh}
+#storm::before{content:"";position:absolute;top:0;left:0;right:0;height:46vh;z-index:4;background:linear-gradient(180deg,#000 0%,rgba(0,0,0,.72) 22%,rgba(0,0,0,.38) 48%,rgba(0,0,0,.12) 70%,transparent 92%)}
 .flash{position:absolute;top:-2%;left:0;right:0;height:60vh;z-index:4;pointer-events:none;background:radial-gradient(58% 52% at 50% 0%,rgba(196,228,255,.55),rgba(120,170,230,.12) 55%,transparent 72%);opacity:0;animation:flash 13s linear infinite}
 @keyframes flash{0%,86%,90.5%,93%,100%{opacity:0}87.5%,89%{opacity:.42}91.5%{opacity:.18}}
 /* 4 - storm cools into CIL: black fall + drifting embers */
@@ -137,6 +138,7 @@ html[data-theme="light"] #themeSwitch .thumb{transform:translateX(18px)}
 .drift b{position:absolute;top:-2vh;width:3px;height:3px;border-radius:50%;background:radial-gradient(circle,#ffc06a,rgba(255,110,35,0));opacity:0;animation:emberfall linear infinite}
 @keyframes emberfall{0%{transform:translate(0,0);opacity:0}10%{opacity:.85}100%{transform:translate(4vw,34vh);opacity:0}}
 /* 5 - CIL settles into the site's black */
+#cil::before{content:"";position:absolute;top:0;left:0;right:0;height:30vh;z-index:4;background:linear-gradient(180deg,#050506 0%,rgba(5,5,6,.6) 40%,transparent 85%)}
 #cil::after{content:"";position:absolute;left:0;right:0;bottom:0;height:36vh;z-index:4;background:linear-gradient(180deg,transparent,rgba(5,5,6,.55) 55%,var(--bg2) 98%)}
 
 /* ============ HUD ============ */
@@ -886,4 +888,4 @@ if(!REDUCED && !QA && window.matchMedia('(pointer:fine)').matches){
 })();
 </script>
 </body>
-</html>
+                                                                                                                    </html>
