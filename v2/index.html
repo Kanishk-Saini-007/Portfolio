@@ -368,13 +368,15 @@ h1,h2.mega,.p-copy h2{
 
 /* ============ CONTACT ============ */
 #contact{
-  background:#f2f1ee;color:#101012;
+  background:#f2f1ee;
+  background:linear-gradient(180deg,
+    #050506 0%, #050506 7%,
+    #161615 10.5%, #2c2c2a 14%, #454542 17.5%, #5f5f5a 21%,
+    #797971 24.5%, #92918a 27.5%, #aaa9a1 30.5%, #c1c0b9 33%,
+    #d5d4cd 35.5%, #e6e5e1 38%, #f2f1ee 40.5%, #f2f1ee 100%);
+  color:#101012;
   min-height:92svh;display:flex;flex-direction:column;justify-content:center;
   padding:14vh 5vw 0;position:relative;overflow:hidden;
-}
-#contact::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:30vh;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(5,5,6,.92) 0%,rgba(5,5,6,.55) 35%,rgba(5,5,6,.12) 70%,transparent 100%);
 }
 #contact h2{color:#101012}
 #contact .btn{border-color:rgba(16,16,18,.45);color:#101012}
@@ -387,9 +389,9 @@ h1,h2.mega,.p-copy h2{
 #contact .lede{margin-top:3vh;font-size:16px;color:var(--mut)}
 .c-links{display:flex;gap:14px;margin-top:5vh;flex-wrap:wrap}
 #contact footer{
-  margin:auto -5vw 0;padding:26px 5vw;border-top:1px solid rgba(16,16,18,.14);
+  margin:auto -5vw 0;padding:26px 5vw;border-top:1px solid rgba(16,16,18,.3);
   display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
-  font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.22em;color:rgba(16,16,18,.55);
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.22em;font-weight:500;color:rgba(10,10,12,.92);
 }
 #contact footer a:hover{color:#c96a00}
 #contact .lede{color:rgba(16,16,18,.62)}
