@@ -116,7 +116,7 @@ header.full .h-meta{display:none}
 #hero .bg::after{background:linear-gradient(180deg,rgba(4,5,8,.46),rgba(4,5,8,.36) 30%,rgba(4,5,8,.44) 58%,rgba(4,5,8,.85) 92%),linear-gradient(90deg,rgba(4,5,8,.58),rgba(4,5,8,.14) 50%,rgba(4,5,8,0) 66%)}
 #build .bg::after{background:linear-gradient(180deg,rgba(5,5,6,.45),rgba(5,5,6,.12) 32%,rgba(5,5,6,.5) 68%,rgba(5,5,6,.86) 94%),linear-gradient(90deg,rgba(5,5,6,.55),rgba(5,5,6,0) 58%)}
 #storm .bg::after{background:linear-gradient(180deg,rgba(3,6,10,.42),rgba(3,6,10,0) 35%,rgba(3,6,10,.32) 65%,rgba(3,6,10,.8) 92%),linear-gradient(90deg,rgba(3,6,10,.48),rgba(3,6,10,0) 55%)}
-#attendx .bg::after{background:linear-gradient(180deg,rgba(243,242,238,1) 0%,rgba(243,242,238,.82) 4%,rgba(243,242,238,.5) 9%,rgba(243,242,238,.24) 15%,rgba(243,242,238,.1) 24%,rgba(243,242,238,.08) 40%,rgba(243,242,238,.3) 72%,rgba(243,242,238,.6) 92%),linear-gradient(270deg,rgba(243,242,238,.68),rgba(243,242,238,0) 55%),var(--dither);background-size:auto,auto,160px 160px;background-blend-mode:overlay}
+#attendx .bg::after{background:linear-gradient(180deg,rgba(243,242,238,1) 0%,rgba(243,242,238,.68) 3%,rgba(243,242,238,.34) 7%,rgba(243,242,238,.12) 12%,rgba(243,242,238,.06) 20%,rgba(243,242,238,.06) 40%,rgba(243,242,238,.3) 72%,rgba(243,242,238,.6) 92%),linear-gradient(270deg,rgba(243,242,238,.68),rgba(243,242,238,0) 55%),var(--dither);background-size:auto,auto,160px 160px;background-blend-mode:overlay}
 #hero h2,#build h2,#storm h2{text-shadow:0 2px 34px rgba(0,0,0,.35)}
 #build .bg{background-position:50% 18%}
 #attendx .p-copy.tr{top:10vh}
@@ -145,7 +145,7 @@ header.full .h-meta{display:none}
 /* 1 - hero melts into fog: light bloom + rolling smoke */
 #hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:36vh;z-index:4;background:linear-gradient(180deg,transparent 0%,rgba(5,5,6,.5) 58%,#050506 97%)}
 #build .shade{background:linear-gradient(180deg,rgba(5,5,6,.5) 0%,rgba(5,5,6,.28) 30%,rgba(5,5,6,.38) 48%,rgba(5,5,6,.6) 62%,rgba(5,5,6,.8) 76%,rgba(5,5,6,.92) 88%,rgba(5,5,6,.97) 100%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay}
-.seam{position:absolute;left:0;right:0;bottom:0;height:15vh;background:linear-gradient(180deg,rgba(243,242,238,0) 0%,rgba(243,242,238,.06) 14%,rgba(243,242,238,.14) 26%,rgba(243,242,238,.24) 37%,rgba(243,242,238,.36) 48%,rgba(243,242,238,.48) 58%,rgba(243,242,238,.6) 67%,rgba(243,242,238,.71) 75%,rgba(243,242,238,.81) 82%,rgba(243,242,238,.89) 88%,rgba(243,242,238,.95) 93%,rgba(243,242,238,1) 100%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay;z-index:5;pointer-events:none}
+.seam{position:absolute;left:0;right:0;bottom:0;height:10vh;background:linear-gradient(180deg,rgba(243,242,238,0) 0%,rgba(243,242,238,.06) 14%,rgba(243,242,238,.14) 26%,rgba(243,242,238,.24) 37%,rgba(243,242,238,.36) 48%,rgba(243,242,238,.48) 58%,rgba(243,242,238,.6) 67%,rgba(243,242,238,.71) 75%,rgba(243,242,238,.81) 82%,rgba(243,242,238,.89) 88%,rgba(243,242,238,.95) 93%,rgba(243,242,238,1) 100%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay;z-index:5;pointer-events:none}
 #build::before{content:"";position:absolute;top:0;left:0;right:0;height:30vh;z-index:4;background:linear-gradient(180deg,#050506 5%,transparent)}
 #build::after{content:"";position:absolute;left:0;right:0;bottom:0;height:52vh;z-index:4;background:linear-gradient(180deg,transparent 0%,rgba(226,226,224,.26) 46%,rgba(232,231,228,.6) 74%,#eeede9 97%)}
 .si{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;letter-spacing:0}
@@ -156,12 +156,12 @@ header.full .h-meta{display:none}
 .mq b{font-weight:400;color:var(--amber);-webkit-text-stroke:0}
 @keyframes mq{to{transform:translateX(-50%)}}
 .engage{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.22em;border:1px solid currentColor;border-radius:999px;padding:7px 14px;text-decoration:none;color:inherit}
-.smoke{position:absolute;left:0;right:0;bottom:0;height:44vh;overflow:hidden;z-index:4;pointer-events:none;opacity:.35}
-.smoke i{position:absolute;border-radius:50%;filter:blur(34px);background:radial-gradient(closest-side,rgba(243,242,238,.55),rgba(243,242,238,0));width:64vw;height:42vh;left:-12vw;bottom:-14vh;animation:smokelift 15s ease-in-out infinite alternate}
+.smoke{position:absolute;left:0;right:0;bottom:0;height:36vh;overflow:hidden;z-index:4;pointer-events:none;opacity:.35}
+.smoke i{position:absolute;border-radius:50%;filter:blur(34px);background:radial-gradient(closest-side,rgba(243,242,238,.38),rgba(243,242,238,0));width:64vw;height:42vh;left:-12vw;bottom:-14vh;animation:smokelift 15s ease-in-out infinite alternate}
 .smoke i:nth-child(2){left:26vw;bottom:-20vh;width:58vw;animation-duration:19s;animation-delay:-6s}
 .smoke i:nth-child(3){left:62vw;bottom:-16vh;width:52vw;animation-duration:12s;animation-delay:-3s}
 @keyframes smokelift{from{transform:translateY(7vh) scale(1)}to{transform:translateY(-9vh) scale(1.18)}}
-#attendx::before{content:"";position:absolute;top:0;left:0;right:0;height:12vh;z-index:4;background:linear-gradient(180deg,#eeede9 0%,rgba(238,237,233,.88) 16%,rgba(238,237,233,.5) 42%,rgba(238,237,233,.15) 68%,transparent 90%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay}
+#attendx::before{content:"";position:absolute;top:0;left:0;right:0;height:8vh;z-index:4;background:linear-gradient(180deg,#eeede9 0%,rgba(238,237,233,.88) 16%,rgba(238,237,233,.5) 42%,rgba(238,237,233,.15) 68%,transparent 90%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay}
 /* 2 - fog sinks into black for the ember dissolve */
 #attendx::after{content:"";position:absolute;left:0;right:0;bottom:0;height:38vh;z-index:4;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.6) 55%,#000 97%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay}
 /* 3 - black gives way to storm: dark mantle + distant lightning */
@@ -265,7 +265,7 @@ h1,h2.mega,.p-copy h2{
 #hero .qcard{right:5vw;top:34vh}
 #build .qcard{right:5vw;top:30vh}
 #build .sub{color:#f4f3f0;font-weight:500;text-shadow:0 1px 14px rgba(5,5,6,.7),0 0 3px rgba(5,5,6,.55),0 0 28px rgba(5,5,6,.5)}
-#attendx .qcard{left:5vw;top:38vh;border-color:rgba(16,16,18,.14);background:rgba(255,255,255,.35)}
+#attendx .qcard{left:5vw;top:32vh;border-color:rgba(16,16,18,.14);background:rgba(255,255,255,.35)}
 #storm .qcard{right:5vw;top:30vh}
 .q-idx{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.26em;color:var(--amber);margin-bottom:10px}
 #attendx .q-idx{color:#c96a00}
