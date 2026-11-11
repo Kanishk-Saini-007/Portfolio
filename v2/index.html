@@ -119,6 +119,7 @@ header.full .h-meta{display:none}
 #attendx .bg::after{background:linear-gradient(180deg,rgba(243,242,238,1) 0%,rgba(243,242,238,.82) 4%,rgba(243,242,238,.5) 9%,rgba(243,242,238,.24) 15%,rgba(243,242,238,.1) 24%,rgba(243,242,238,.08) 40%,rgba(243,242,238,.3) 72%,rgba(243,242,238,.6) 92%),linear-gradient(270deg,rgba(243,242,238,.68),rgba(243,242,238,0) 55%),var(--dither);background-size:auto,auto,160px 160px;background-blend-mode:overlay}
 #hero h2,#build h2,#storm h2{text-shadow:0 2px 34px rgba(0,0,0,.35)}
 #build .bg{background-position:50% 18%}
+#attendx .p-copy.tr{top:10vh}
 #attendx .p-copy h2{font-size:clamp(40px,5.6vw,76px)}
 #build .bg{filter:saturate(1.02) brightness(.88)}
 #cil .bg {
@@ -144,7 +145,7 @@ header.full .h-meta{display:none}
 /* 1 - hero melts into fog: light bloom + rolling smoke */
 #hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:36vh;z-index:4;background:linear-gradient(180deg,transparent 0%,rgba(5,5,6,.5) 58%,#050506 97%)}
 #build .shade{background:linear-gradient(180deg,rgba(5,5,6,.5) 0%,rgba(5,5,6,.28) 30%,rgba(5,5,6,.38) 48%,rgba(5,5,6,.6) 62%,rgba(5,5,6,.8) 76%,rgba(5,5,6,.92) 88%,rgba(5,5,6,.97) 100%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay}
-.seam{position:absolute;left:0;right:0;bottom:0;height:30vh;background:linear-gradient(180deg,rgba(243,242,238,0) 0%,rgba(243,242,238,.06) 14%,rgba(243,242,238,.14) 26%,rgba(243,242,238,.24) 37%,rgba(243,242,238,.36) 48%,rgba(243,242,238,.48) 58%,rgba(243,242,238,.6) 67%,rgba(243,242,238,.71) 75%,rgba(243,242,238,.81) 82%,rgba(243,242,238,.89) 88%,rgba(243,242,238,.95) 93%,rgba(243,242,238,1) 100%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay;z-index:5;pointer-events:none}
+.seam{position:absolute;left:0;right:0;bottom:0;height:15vh;background:linear-gradient(180deg,rgba(243,242,238,0) 0%,rgba(243,242,238,.06) 14%,rgba(243,242,238,.14) 26%,rgba(243,242,238,.24) 37%,rgba(243,242,238,.36) 48%,rgba(243,242,238,.48) 58%,rgba(243,242,238,.6) 67%,rgba(243,242,238,.71) 75%,rgba(243,242,238,.81) 82%,rgba(243,242,238,.89) 88%,rgba(243,242,238,.95) 93%,rgba(243,242,238,1) 100%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay;z-index:5;pointer-events:none}
 #build::before{content:"";position:absolute;top:0;left:0;right:0;height:30vh;z-index:4;background:linear-gradient(180deg,#050506 5%,transparent)}
 #build::after{content:"";position:absolute;left:0;right:0;bottom:0;height:52vh;z-index:4;background:linear-gradient(180deg,transparent 0%,rgba(226,226,224,.26) 46%,rgba(232,231,228,.6) 74%,#eeede9 97%)}
 .si{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;letter-spacing:0}
@@ -155,12 +156,12 @@ header.full .h-meta{display:none}
 .mq b{font-weight:400;color:var(--amber);-webkit-text-stroke:0}
 @keyframes mq{to{transform:translateX(-50%)}}
 .engage{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.22em;border:1px solid currentColor;border-radius:999px;padding:7px 14px;text-decoration:none;color:inherit}
-.smoke{position:absolute;left:0;right:0;bottom:0;height:64vh;overflow:hidden;z-index:4;pointer-events:none;opacity:.35}
+.smoke{position:absolute;left:0;right:0;bottom:0;height:44vh;overflow:hidden;z-index:4;pointer-events:none;opacity:.35}
 .smoke i{position:absolute;border-radius:50%;filter:blur(34px);background:radial-gradient(closest-side,rgba(243,242,238,.55),rgba(243,242,238,0));width:64vw;height:42vh;left:-12vw;bottom:-14vh;animation:smokelift 15s ease-in-out infinite alternate}
 .smoke i:nth-child(2){left:26vw;bottom:-20vh;width:58vw;animation-duration:19s;animation-delay:-6s}
 .smoke i:nth-child(3){left:62vw;bottom:-16vh;width:52vw;animation-duration:12s;animation-delay:-3s}
 @keyframes smokelift{from{transform:translateY(7vh) scale(1)}to{transform:translateY(-9vh) scale(1.18)}}
-#attendx::before{content:"";position:absolute;top:0;left:0;right:0;height:18vh;z-index:4;background:linear-gradient(180deg,#eeede9 0%,rgba(238,237,233,.88) 16%,rgba(238,237,233,.5) 42%,rgba(238,237,233,.15) 68%,transparent 90%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay}
+#attendx::before{content:"";position:absolute;top:0;left:0;right:0;height:12vh;z-index:4;background:linear-gradient(180deg,#eeede9 0%,rgba(238,237,233,.88) 16%,rgba(238,237,233,.5) 42%,rgba(238,237,233,.15) 68%,transparent 90%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay}
 /* 2 - fog sinks into black for the ember dissolve */
 #attendx::after{content:"";position:absolute;left:0;right:0;bottom:0;height:38vh;z-index:4;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.6) 55%,#000 97%),var(--dither);background-size:auto,160px 160px;background-blend-mode:overlay}
 /* 3 - black gives way to storm: dark mantle + distant lightning */
@@ -927,7 +928,7 @@ function onScroll(){
     if(smokeEl&&!QA){
       var hr=buildEl.getBoundingClientRect();
       var out=Math.max(0,Math.min(1,-hr.top/vh));
-      smokeEl.style.opacity=(0.35+0.65*out).toFixed(3);
+      smokeEl.style.opacity=(0.22+0.48*out).toFixed(3);
       var cueEl=document.querySelector('.scroll-cue');
       if(cueEl)cueEl.style.visibility=window.scrollY>40?'hidden':'';
     }
