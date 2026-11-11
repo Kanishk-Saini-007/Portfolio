@@ -105,14 +105,20 @@ header.full .h-meta{display:none}
 .bg{
   position:absolute;inset:-4%;
   background-size:cover;background-position:center;
-  filter:blur(10px) saturate(.96) brightness(.82);
+  filter:saturate(1.02) brightness(.92);
   animation:kb 16s ease-in-out infinite alternate;
 }
 @keyframes kb{from{transform:scale(1)}to{transform:scale(1.09)}}
-#hero .bg{background-position:42% 30%;filter:blur(6px) saturate(.96) brightness(.85)}
+#hero .bg { background-position:50% 35%;filter:saturate(1.04) brightness(.95) }
+.panel .bg::after{content:"";position:absolute;inset:0;pointer-events:none}
+#hero .bg::after{background:linear-gradient(180deg,rgba(4,5,8,.42),rgba(4,5,8,0) 32%,rgba(4,5,8,0) 55%,rgba(4,5,8,.82) 90%),linear-gradient(90deg,rgba(4,5,8,.5),rgba(4,5,8,0) 55%)}
+#build .bg::after{background:linear-gradient(180deg,rgba(5,5,6,.45),rgba(5,5,6,.12) 32%,rgba(5,5,6,.5) 68%,rgba(5,5,6,.86) 94%),linear-gradient(90deg,rgba(5,5,6,.55),rgba(5,5,6,0) 58%)}
+#storm .bg::after{background:linear-gradient(180deg,rgba(3,6,10,.42),rgba(3,6,10,0) 35%,rgba(3,6,10,.32) 65%,rgba(3,6,10,.8) 92%),linear-gradient(90deg,rgba(3,6,10,.48),rgba(3,6,10,0) 55%)}
+#attendx .bg::after{background:linear-gradient(180deg,rgba(243,242,238,.6),rgba(243,242,238,.28) 40%,rgba(243,242,238,.78) 92%),linear-gradient(270deg,rgba(243,242,238,.62),rgba(243,242,238,0) 55%)}
+#hero h2,#build h2,#storm h2{text-shadow:0 2px 34px rgba(0,0,0,.35)}
 #build .bg{background-position:50% 18%}
 #attendx .p-copy h2{font-size:clamp(40px,5.6vw,76px)}
-#build .bg{filter:blur(10px) saturate(.96) brightness(.62)}
+#build .bg{filter:saturate(1.02) brightness(.88)}
 #cil .bg {
   background-color:#04060c;
   background-image:
@@ -121,6 +127,7 @@ header.full .h-meta{display:none}
     linear-gradient(112deg,transparent 2%,rgba(70,140,255,.14) 20%,transparent 38%),
     radial-gradient(58% 42% at 60% 46%,rgba(103,216,255,.13),transparent 70%);
   background-size:cover;background-position:center;
+  filter:blur(24px) saturate(1.1);
 }
 .shade{position:absolute;inset:0;background:
   linear-gradient(180deg,rgba(5,5,6,.55),transparent 30%,transparent 55%,rgba(5,5,6,.75));}
@@ -252,7 +259,7 @@ h1,h2.mega,.p-copy h2{
 }
 #hero .qcard{right:5vw;top:34vh}
 #build .qcard{right:5vw;top:30vh}
-#build .sub{color:rgba(16,16,18,.8)}
+#build .sub{color:rgba(240,244,250,.9);text-shadow:0 1px 10px rgba(0,0,0,.45)}
 #attendx .qcard{left:5vw;top:38vh;border-color:rgba(16,16,18,.14);background:rgba(255,255,255,.35)}
 #storm .qcard{right:5vw;top:30vh}
 .q-idx{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.26em;color:var(--amber);margin-bottom:10px}
