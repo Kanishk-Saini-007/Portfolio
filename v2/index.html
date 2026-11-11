@@ -44,10 +44,13 @@ header{
   display:flex;align-items:center;gap:28px;
   padding:18px 28px;
   font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.26em;
-  transition:background .5s,color .5s;
+  transition:background .5s,color .5s,box-shadow .5s;
   color:var(--white);
+  background:rgba(5,5,6,.28);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 rgba(246,246,244,.14);
 }
-header.light{color:#111}
+header.light{color:#111;background:rgba(242,241,238,.42);box-shadow:0 1px 0 rgba(16,16,18,.14)}
 header.storm{background:linear-gradient(180deg,rgba(8,32,58,.55),transparent);}
 .h-left{display:flex;align-items:center;gap:9px;font-weight:700}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);flex:none}
@@ -215,6 +218,7 @@ h1,h2.mega,.p-copy h2{
   background:rgba(255,255,255,.07);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
 }
 #hero .qcard{right:5vw;top:34vh}
+#build .qcard{right:5vw;top:30vh}
 #attendx .qcard{left:5vw;top:38vh;border-color:rgba(16,16,18,.14);background:rgba(255,255,255,.35)}
 #storm .qcard{right:5vw;top:30vh}
 .q-idx{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.26em;color:var(--amber);margin-bottom:10px}
