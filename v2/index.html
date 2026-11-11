@@ -105,11 +105,11 @@ header.full .h-meta{display:none}
 .bg{
   position:absolute;inset:-4%;
   background-size:cover;background-position:center;
-  filter:blur(7px) saturate(1.06);
+  filter:blur(10px) saturate(.96) brightness(.82);
   animation:kb 16s ease-in-out infinite alternate;
 }
 @keyframes kb{from{transform:scale(1)}to{transform:scale(1.09)}}
-#hero .bg{background-position:42% 30%;filter:blur(3.5px) saturate(1.06)}
+#hero .bg{background-position:42% 30%;filter:blur(6px) saturate(.96) brightness(.85)}
 #build .bg{background-position:50% 18%}
 #attendx .p-copy h2{font-size:clamp(40px,5.6vw,76px)}
 #cil .bg {
@@ -403,10 +403,10 @@ h1,h2.mega,.p-copy h2{
 .arc-holder{display:flex;align-items:center;justify-content:center}
 .arc-holder::after{display:none}
 .arc-holder svg{width:100%;max-width:440px;height:auto;display:block;overflow:visible}
-.ab-bed{filter:drop-shadow(0 0 22px rgba(103,216,255,.45));animation:abBreathe 3.2s ease-in-out infinite}
-.ab-coilspin{transform-origin:100px 100px;transform-box:view-box;animation:abSpin 70s linear infinite;filter:drop-shadow(0 0 5px rgba(224,165,101,.35))}
-.ab-core{transform-origin:100px 100px;transform-box:view-box;filter:drop-shadow(0 0 18px #67d8ff) drop-shadow(0 0 52px rgba(103,216,255,.8));animation:abPulse 2.4s ease-in-out infinite}
-.ab-tri{filter:drop-shadow(0 0 8px #9ee2ff);animation:abTriPulse 2.4s ease-in-out infinite}
+.ab-bed{filter:drop-shadow(0 0 14px rgba(103,216,255,.3));animation:abBreathe 3.2s ease-in-out infinite}
+.ab-coilspin{transform-origin:100px 100px;transform-box:view-box;animation:abSpin 70s linear infinite;filter:drop-shadow(0 0 3px rgba(224,165,101,.25))}
+.ab-core{transform-origin:100px 100px;transform-box:view-box;filter:drop-shadow(0 0 10px #67d8ff) drop-shadow(0 0 30px rgba(103,216,255,.5));animation:abPulse 2.4s ease-in-out infinite}
+.ab-tri{filter:drop-shadow(0 0 5px #9ee2ff);animation:abTriPulse 2.4s ease-in-out infinite}
 @keyframes abPulse{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.07);opacity:1}}
 @keyframes abTriPulse{0%,100%{opacity:.85}50%{opacity:1}}
 @keyframes abBreathe{0%,100%{opacity:.6}50%{opacity:1}}
