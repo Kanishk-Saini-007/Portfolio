@@ -46,9 +46,11 @@ header{
   font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.26em;
   transition:background .5s,color .5s,box-shadow .5s;
   color:var(--white);
+  background:rgba(5,5,8,.38);
+  backdrop-filter:blur(18px) saturate(1.15);-webkit-backdrop-filter:blur(18px) saturate(1.15);
   box-shadow:0 1px 0 rgba(246,246,244,.14);
 }
-header.light{color:#111;box-shadow:0 1px 0 rgba(16,16,18,.14)}
+header.light{color:#111;background:rgba(238,237,233,.45);box-shadow:0 1px 0 rgba(16,16,18,.14)}
 header.storm{background:linear-gradient(180deg,rgba(8,32,58,.55),transparent);}
 .h-left{display:flex;align-items:center;gap:9px;font-weight:700}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);flex:none}
