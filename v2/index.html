@@ -25,12 +25,6 @@
   --mut2:rgba(246,246,244,.55);
   --line2:rgba(246,246,244,.12);
 }
-html[data-theme="light"]{
-  --bg2:#f2f1ee;
-  --fg2:#101012;
-  --mut2:rgba(16,16,18,.6);
-  --line2:rgba(16,16,18,.14);
-}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -67,15 +61,6 @@ header.storm .dot{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
 .h-full a.act{opacity:1;border-bottom-color:currentColor}
 header.full .h-full{display:flex}
 header.full .h-meta{display:none}
-#themeSwitch{
-  margin-left:6px;flex:none;border:1px solid currentColor;background:transparent;
-  width:36px;height:18px;border-radius:999px;cursor:pointer;position:relative;opacity:.85;
-}
-#themeSwitch .thumb{
-  position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;
-  background:var(--amber);transition:transform .35s cubic-bezier(.7,0,.3,1);
-}
-html[data-theme="light"] #themeSwitch .thumb{transform:translateX(18px)}
 
 /* ============ PANEL SYSTEM ============ */
 .panel{
@@ -421,7 +406,6 @@ h1,h2.mega,.p-copy h2{
     <a href="#contact" data-s="contact">CONTACT</a>
   </nav>
   <a class="engage" href="#contact">ENGAGE ↗</a>
-  <button id="themeSwitch" role="switch" aria-checked="false" aria-label="Toggle light mode for site sections"><span class="thumb"></span></button>
 </header>
 
 <main>
@@ -681,18 +665,6 @@ h1,h2.mega,.p-copy h2{
 var QA = /[?&]qa=1/.test(location.search);
 var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ---------- theme switch (site sections only) ---------- */
-var root=document.documentElement;
-var sw=document.getElementById('themeSwitch');
-function setTheme(t){
-  if(t==='light'){root.setAttribute('data-theme','light');sw.setAttribute('aria-checked','true');}
-  else{root.removeAttribute('data-theme');sw.setAttribute('aria-checked','false');}
-  try{localStorage.setItem('ds-theme',t);}catch(e){}
-}
-try{if(localStorage.getItem('ds-theme')==='light')setTheme('light');}catch(e){}
-sw.addEventListener('click',function(){
-  setTheme(root.getAttribute('data-theme')==='light'?'dark':'light');
-});
 
 /* ---------- letter split for CIL title ---------- */
 var cil=document.getElementById('cilTitle');
